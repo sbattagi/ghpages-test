@@ -2,61 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Oracle Fusion Middleware on Kubernetes</title>
-    <link>/fmw-kubernetes/</link>
+    <link>/ghpages-test/</link>
     <description>Recent content on Oracle Fusion Middleware on Kubernetes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 18 Apr 2019 06:46:23 -0500</lastBuildDate>
     
-	<atom:link href="/fmw-kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/ghpages-test/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Configuring a load balancer for SOA Domains</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/configuring-load-balancer/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/configuring-load-balancer/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/configuring-load-balancer/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/configuring-load-balancer/</guid>
       <description>An Ingress based load balancer can be configured to access the Oracle SOA and Oracle Service Bus domain application URLs. Refer to the setup Ingress document for details.
 As part of the ingress-per-domain setup for Oracle SOA and Oracle Service Bus domains, the values.yaml file (under the ingress-per-domain directory) needs to be updated with the appropriate values from your environment. A sample values.yaml file (for the Traefik load balancer) is shown below:</description>
     </item>
     
     <item>
       <title>Monitoring a SOA domain</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/monitoring-soa-domains/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/monitoring-soa-domains/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/monitoring-soa-domains/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/monitoring-soa-domains/</guid>
       <description>After the SOA domain is set up, you can:
  Monitor the SOA instance using Prometheus and Grafana. See Monitoring a domain. Publish operator and WebLogic Server logs into Elasticsearch and interact with them in Kibana. See Publish logs to Elasticsearch.  </description>
     </item>
     
     <item>
       <title>Delete the SOA domain home</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/delete-domain-home/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/delete-domain-home/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/delete-domain-home/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/delete-domain-home/</guid>
       <description>Sometimes in production, but most likely in testing environments, you might want to remove the domain home that is generated using the create-domain.sh script. Do this by running the generated delete domain job script in the /&amp;lt;path to weblogic-operator-output-directory&amp;gt;/weblogic-domains/&amp;lt;domainUID&amp;gt; directory.
 $ kubectl create -f delete-domain-job.yaml </description>
     </item>
     
     <item>
       <title>Deploying SOA Composites from Oracle JDeveloper</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/supportjdev/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/supportjdev/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/supportjdev/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/supportjdev/</guid>
       <description>This documents provides steps to deploy SOA composite applications from Oracle JDeveloper (that runs outside the Kubernetes network) to the SOA instance in WebLogic Kubernetes Operator Environment.
 Note: Dev and Test environment only. For production you should deploy using Application Control and WLST methods. Deploy to SOA from JDeveloper To deploy SOA composites/applications from Oracle JDeveloper, Administration Server should have been configured to expose a T3 channel using the exposeAdminT3Channel setting when creating the domain, then the matching T3 service can be used to connect.</description>
     </item>
     
     <item>
       <title>Expose T3 protocol for Managed Servers</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/enablingt3/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/enablingt3/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/enablingt3/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/enablingt3/</guid>
       <description>T3 ports for Managed Servers in Oracle SOA deployed in WebLogic Kubernetes operator Environment are not available by default. This document provides steps to create T3 channel and the corresponding Kubernetes Service to expose the T3 protocol for Managed Servers in SOA Domain.
 With the following steps you will be creating T3 port at 30014 on all Managed Servers for soa_cluster with below details:
  Name: T3Channel_MS Listen Port: 30014 External Listen Address: &amp;lt;Master IP Address&amp;gt; External Listen Port: 30014  Note: In case you are using different NodePort to expose T3 for Managed Server externally, then use same value for &amp;quot;External Listen Port&amp;quot;</description>
@@ -64,10 +64,10 @@ With the following steps you will be creating T3 port at 30014 on all Managed Se
     
     <item>
       <title>Persisting SOA Adapters Customizations</title>
-      <link>/fmw-kubernetes/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/</link>
+      <link>/ghpages-test/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/</link>
       <pubDate>Fri, 22 Feb 2019 15:44:42 -0500</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/</guid>
+      <guid>/ghpages-test/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/</guid>
       <description>The lifetime for any customization done in a file on a server pod is upto the lifetime of that pod, the changes are not persisted once the pod goes down or restarted.
 For example: Below configuration updates DbAdapter.rar to create a new connection instance and creates DatasSource CoffeeShop on Administration Console for the same with jdbc/CoffeeShopDS.
 file location: /u01/oracle/soa/soa/connectors/DbAdapter.rar
@@ -76,39 +76,39 @@ file location: /u01/oracle/soa/soa/connectors/DbAdapter.rar
     
     <item>
       <title>Release Notes</title>
-      <link>/fmw-kubernetes/soa-domains/release-notes/</link>
+      <link>/ghpages-test/soa-domains/release-notes/</link>
       <pubDate>Fri, 15 Mar 2019 11:25:28 -0400</pubDate>
       
-      <guid>/fmw-kubernetes/soa-domains/release-notes/</guid>
+      <guid>/ghpages-test/soa-domains/release-notes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>a. Using Traefik Loadbalancer</title>
-      <link>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/</link>
+      <link>/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/</guid>
+      <guid>/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/</guid>
       <description>Setting Up Loadbalancer Traefik for the WebCenter Sites Domain on K8S The Oracle WebLogic Server Kubernetes Operator supports three load balancers: Traefik, Voyager, and Apache. Follow these steps to set up Traefik as a loadbalancer for the WebCenter Sites domain:
  Install the Traefik Load Balancer Configure Traefik to Manage Ingresses Create an Ingress for the Domain Verify that You can Access the Domain URL  Install the Traefik Load Balancer   Use helm to install the Traefik load balancer.</description>
     </item>
     
     <item>
       <title>b. Using Voyager Loadbalancer</title>
-      <link>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/</link>
+      <link>/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/</guid>
+      <guid>/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/</guid>
       <description>Setting Up Loadbalancer Voyager for the WebCenter Sites Domain on K8S The Oracle WebLogic Server Kubernetes Operator supports three load balancers: Traefik, Voyager, and Apache. Follow these steps to set up Voyager as a loadbalancer for the WebCenter Sites domain:
  Install the Voyager Load Balancer Configure Voyager to Manage Ingresses Verify that You can Access the Domain URL  Install the Voyager Load Balancer See the official installation document and follow step 1 and 2 here.</description>
     </item>
     
     <item>
       <title>c. ELK Integration for Logs</title>
-      <link>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/</link>
+      <link>/ghpages-test/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/</guid>
+      <guid>/ghpages-test/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/</guid>
       <description>1. Integrate Elasticsearch to WebLogic Kubernetes Operator For reference information, see Elasticsearch integration for the WebLogic Kubernetes Operator.
 To enable elasticsearch integration, you must edit file kubernetes/charts/weblogic-operator/values.yaml before deploying the WebLogic Kubernetes Operator.
 # elkIntegrationEnabled specifies whether or not ELK integration is enabled. elkIntegrationEnabled: true # logStashImage specifies the docker image containing logstash. # This parameter is ignored if &#39;elkIntegrationEnabled&#39; is false. logStashImage: &amp;quot;logstash:6.6.0&amp;quot; # elasticSearchHost specifies the hostname of where Elasticsearch is running.</description>
@@ -116,10 +116,10 @@ To enable elasticsearch integration, you must edit file kubernetes/charts/weblog
     
     <item>
       <title>d. Publish logs to Elasticsearch</title>
-      <link>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/</link>
+      <link>/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/</guid>
+      <guid>/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/</guid>
       <description>The WebLogic Logging Exporter adds a log event handler to WebLogic Server. WebLogic Server logs can be pushed to Elasticsearch in Kubernetes directly by using the Elasticsearch REST API. For more details, see to the WebLogic Logging Exporter project.
 This sample shows you how to publish WebLogic Server logs to Elasticsearch and view them in Kibana. For publishing operator logs, see this sample.
 Prerequisites This document assumes that you have already set up Elasticsearch and Kibana for logs collection.</description>
@@ -127,20 +127,20 @@ Prerequisites This document assumes that you have already set up Elasticsearch a
     
     <item>
       <title>e. Monitor a WebCenter Sites domain</title>
-      <link>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/</link>
+      <link>/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/</guid>
+      <guid>/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/</guid>
       <description>You can monitor a WebCenter Sites domain using Prometheus and Grafana by exporting the metrics from the domain instance using the WebLogic Monitoring Exporter. This sample shows you how to set up the WebLogic Monitoring Exporter to push the data to Prometheus.
 Prerequisites This document assumes that the Prometheus Operator is deployed on the Kubernetes cluster. If it is not already deployed, follow the steps below for deploying the Prometheus Operator.</description>
     </item>
     
     <item>
       <title>Release Notes</title>
-      <link>/fmw-kubernetes/wcsites-domains/release-notes/</link>
+      <link>/ghpages-test/wcsites-domains/release-notes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/fmw-kubernetes/wcsites-domains/release-notes/</guid>
+      <guid>/ghpages-test/wcsites-domains/release-notes/</guid>
       <description>Recent changes    Date Version Introduces backward incompatibilities Change            Known issues    Issue Description     None currently     </description>
     </item>
     

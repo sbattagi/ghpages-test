@@ -1,4 +1,4 @@
-baseURL = "/fmw-kubernetes/"
+baseURL = "/ghpages-test/"
 languageCode = "en-us"
 title = "Oracle Fusion Middleware on Kubernetes"
 

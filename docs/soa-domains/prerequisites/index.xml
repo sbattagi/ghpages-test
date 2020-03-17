@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Prerequisites on Oracle Fusion Middleware on Kubernetes</title>
-    <link>/fmw-kubernetes/soa-domains/prerequisites/</link>
+    <link>/ghpages-test/soa-domains/prerequisites/</link>
     <description>Recent content in Prerequisites on Oracle Fusion Middleware on Kubernetes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 18 Apr 2019 07:32:31 -0500</lastBuildDate>
     
-	<atom:link href="/fmw-kubernetes/soa-domains/prerequisites/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/ghpages-test/soa-domains/prerequisites/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
