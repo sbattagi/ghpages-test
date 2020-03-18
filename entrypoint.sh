@@ -34,7 +34,7 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
 git show-ref && \
 cd docs-source && \
 git show-ref && \
-git add . && \
+git add docs && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
