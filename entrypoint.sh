@@ -21,7 +21,7 @@ echo '=================== Build site ==================='
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
 cd docs
-remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
+remote_repo="https://github.com/sbattagi/:${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
