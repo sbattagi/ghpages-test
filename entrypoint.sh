@@ -23,12 +23,17 @@ echo '=================== Publish to GitHub Pages ==================='
 remote_repo="https://github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
+cd .. && \
 git init && \
+git show-ref && \
 git remote add deploy $remote_repo && \
 git status && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+git show-ref && \
+cd docs-source && \
+git show-ref && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
