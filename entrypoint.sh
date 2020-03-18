@@ -26,7 +26,6 @@ echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
 git remote add deploy $remote_repo && \
 git status && \
-cd .. && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
