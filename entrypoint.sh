@@ -1,6 +1,6 @@
 #!/bin/sh
 echo '=================== Install Hugo ==================='
-DOWNLOAD_HUGO_VERSION=${HUGO_VERSION:-0.65.3}
+DOWNLOAD_HUGO_VERSION=${HUGO_VERSION:-0.54.0}
 GITHUB_DEPLOY_REPOSITORY=${GITHUB_REMOTE_REPOSITORY:-$GITHUB_REPOSITORY}
 GITHUB_DEPLOY_BRANCH=${GITHUB_BRANCH:-"gh-pages"}
 echo "Installing Hugo $DOWNLOAD_HUGO_VERSION"
@@ -14,28 +14,22 @@ ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts && \
 echo "${GIT_DEPLOY_KEY}" > /root/.ssh/id_rsa && \
 chmod 400 /root/.ssh/id_rsa
 echo '=================== Update all submodules ==================='
-git show-ref
 git submodule init
 git submodule update --recursive --remote
-cd docs-source
 echo '=================== Build site ==================='
+cd docs-source
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
+cd docs
 remote_repo="https://github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
-cd .. && \
 git init && \
-git show-ref && \
 git remote add deploy $remote_repo && \
-git status && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
-git show-ref && \
-cd docs-source && \
-git show-ref && \
-git add docs && \
+git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
