@@ -7,7 +7,7 @@ LABEL "com.github.actions.color"="red"
 
 LABEL "repository"="https://github.com/sbattagi/ghpages-test"
 LABEL "homepage"="https://github.com/sbattagi/ghpages-test"
-LABEL "maintainer"="Sambasiva Battagiri"
+LABEL "maintainer"="Sambasiva Battagiri <sambasiva.battagiri@oracle.com>"
 
 LABEL "Name"="Hugo for GitHub Pages"
 LABEL "Version"="0.1.0"
