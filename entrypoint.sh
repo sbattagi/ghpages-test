@@ -28,6 +28,9 @@ echo "GITHUB_DEPLOY_REPOSITORY=$GITHUB_DEPLOY_REPOSITORY" && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
 git remote add deploy $remote_repo && \
+echo "remote_repo=$remote_repo" && \
+echo "GITHUB_DEPLOY_BRANCH=$GITHUB_DEPLOY_BRANCH" && \
+echo "GITHUB_BRANCH=$GITHUB_BRANCH" && \
 git status && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
