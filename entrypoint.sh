@@ -12,7 +12,10 @@ echo '=================== Create deploy key to push ==================='
 mkdir /root/.ssh
 ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts && \
 echo "${GIT_DEPLOY_KEY}" > /root/.ssh/id_rsa && \
-chmod 400 /root/.ssh/id_rsa
+chmod 400 /root/.ssh/id_rsa && \
+ls -lrt /root/.ssh/id_rsa && \
+cat /root/.ssh/id_rsa && \
+cat /root/.ssh/known_hosts && \
 echo '=================== Update all submodules ==================='
 git submodule init
 git submodule update --recursive --remote
@@ -21,8 +24,8 @@ cd docs-source
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
 cd docs && \
-#remote_repo="https://github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
-remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
+remote_repo="https://github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
+#remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
