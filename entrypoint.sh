@@ -14,6 +14,7 @@ ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts && \
 echo "${GIT_DEPLOY_KEY}" > /root/.ssh/id_rsa && \
 chmod 400 /root/.ssh/id_rsa
 echo '=================== Update all submodules ==================='
+git show-ref
 git submodule init
 git submodule update --recursive --remote
 cd docs-source
