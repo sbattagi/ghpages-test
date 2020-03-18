@@ -20,7 +20,7 @@ git submodule update --recursive --remote
 echo '=================== Build site ==================='
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
-cd docs
+
 remote_repo="https://github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "samba:GITHUB_REPOSITORY =$GITHUB_REPOSITORY" && \
@@ -36,6 +36,7 @@ git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
 echo "GITHUB_ACTOR=$GITHUB_ACTOR" && \
+cd docs && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
