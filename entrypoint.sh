@@ -28,6 +28,7 @@ echo "GITHUB_DEPLOY_REPOSITORY=$GITHUB_DEPLOY_REPOSITORY" && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
 git remote add deploy $remote_repo && \
+git status && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
@@ -38,7 +39,7 @@ timestamp=$(date +%s%3N) && \
 
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
 git push deploy $remote_branch --force && \
-git status && \
+
 rm -fr .git && \
 cd ../
 echo '=================== Done  ==================='
