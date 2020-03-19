@@ -24,7 +24,6 @@ cd docs-source
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
 cd docs && \
-#remote_repo="https://${GITHUB_ACTOR}:${GIT_HTTPS_ACCESS_TOKEN}@github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
@@ -36,7 +35,7 @@ git config user.email "sambasiva.battagiri@oracle.com" && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
-git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
+git commit -m "Automated deployment of docs to GitHub Pages" > /dev/null 2>&1 && \
 git push deploy $remote_branch --force && \
 rm -fr .git && \
 cd ../
