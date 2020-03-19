@@ -41,7 +41,8 @@ echo "sambasiva.battagiri@oracle.com" > /tmp/inputs.txt && \
 echo "${GIT_HTTPS_ACCESS_TOKEN}" >> /tmp/inputs.txt && \
 echo "inputs file:" && \
 cat /tmp/inputs.txt && \
-git push deploy $remote_branch --force < /tmp/inputs.txt && \
+#git push deploy $remote_branch --force < /tmp/inputs.txt && \
+git push deploy gh-pages && \
 rm -fr .git && \
 cd ../
 echo '=================== Done  ==================='
