@@ -12,3 +12,4 @@ jobs:
       env:
         GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
         HUGO_VERSION: "0.53"
+        GIT_HTTPS_ACCESS_TOKEN: ${{ secrets.GIT_HTTPS_ACCESS_TOKEN }}
