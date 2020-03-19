@@ -13,9 +13,6 @@ mkdir /root/.ssh
 ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts && \
 echo "${GIT_DEPLOY_KEY}" > /root/.ssh/id_rsa && \
 chmod 400 /root/.ssh/id_rsa && \
-ls -lrt /root/.ssh/id_rsa && \
-cat /root/.ssh/id_rsa && \
-cat /root/.ssh/known_hosts && \
 echo '=================== Update all submodules ==================='
 git submodule init
 git submodule update --recursive --remote
@@ -31,7 +28,7 @@ git init && \
 git remote add deploy $remote_repo && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
 git config user.name "${GITHUB_ACTOR}" && \
-git config user.email "sambasiva.battagiri@oracle.com" && \
+git config user.email "${GITHUB_ACTOR_EMAIL}" && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
