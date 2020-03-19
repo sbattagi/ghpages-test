@@ -31,12 +31,13 @@ echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
 git remote add deploy $remote_repo && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
-git config user.name "${GITHUB_ACTOR}" && \
+git config user.name "sambasiva.battagiri@oracle.com" && \
 git config user.email "sambasiva.battagiri@oracle.com" && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
+echo 
 git push deploy $remote_branch --force && \
 rm -fr .git && \
 cd ../
