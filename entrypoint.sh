@@ -39,10 +39,9 @@ timestamp=$(date +%s%3N) && \
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
 echo "sambasiva.battagiri@oracle.com" > /tmp/inputs.txt && \
 echo "${GIT_HTTPS_ACCESS_TOKEN}" >> /tmp/inputs.txt && \
+echo "inputs file:" && \
 cat /tmp/inputs.txt && \
-echo "GIT_HTTPS_ACCESS_TOKEN=${GIT_HTTPS_ACCESS_TOKEN}" && \
-env && \
-git push deploy $remote_branch --force && \
+git push deploy $remote_branch --force < /tmp/inputs.txt && \
 rm -fr .git && \
 cd ../
 echo '=================== Done  ==================='
