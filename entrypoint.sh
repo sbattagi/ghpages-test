@@ -24,25 +24,20 @@ cd docs-source
 HUGO_ENV=production hugo -v --minify -d docs
 echo '=================== Publish to GitHub Pages ==================='
 cd docs && \
-remote_repo="https://${GITHUB_ACTOR}:${GIT_HTTPS_ACCESS_TOKEN}@github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
-#remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
+#remote_repo="https://${GITHUB_ACTOR}:${GIT_HTTPS_ACCESS_TOKEN}@github.com/${GITHUB_DEPLOY_REPOSITORY}.git" && \
+remote_repo="git@github.com:${GITHUB_DEPLOY_REPOSITORY}.git" && \
 remote_branch=${GITHUB_DEPLOY_BRANCH} && \
 echo "Pushing Builds to $remote_repo:$remote_branch" && \
 git init && \
 git remote add deploy $remote_repo && \
 git checkout $remote_branch || git checkout --orphan $remote_branch && \
-git config --global user.name "sambasiva.battagiri@oracle.com" && \
-git config --global user.email "sambasiva.battagiri@oracle.com" && \
+git config user.name "${GITHUB_ACTOR}" && \
+git config user.email "sambasiva.battagiri@oracle.com" && \
 git add . && \
 echo -n 'Files to Commit:' && ls -l | wc -l && \
 timestamp=$(date +%s%3N) && \
 git commit -m "Automated deployment to GitHub Pages on $timestamp" > /dev/null 2>&1 && \
-echo "sambasiva.battagiri@oracle.com" > /tmp/inputs.txt && \
-echo "${GIT_HTTPS_ACCESS_TOKEN}" >> /tmp/inputs.txt && \
-echo "inputs file:" && \
-cat /tmp/inputs.txt && \
-#git push deploy $remote_branch --force < /tmp/inputs.txt && \
-git push deploy gh-pages && \
+git push deploy $remote_branch --force && \
 rm -fr .git && \
 cd ../
 echo '=================== Done  ==================='
