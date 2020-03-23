@@ -1,0 +1,197 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.53"><meta name=description content="Steps to set up Traefik as a loadbalancer for the WebCenter Sites domain."><link rel=icon href=/ghpages-test/images/favicon.png type=image/png><title>a. Using Traefik Loadbalancer :: Oracle Fusion Middleware on Kubernetes</title><link href=/ghpages-test/css/nucleus.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/fontawesome-all.min.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/hybrid.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/featherlight.min.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/perfect-scrollbar.min.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/auto-complete.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/atom-one-dark-reasonable.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/theme.css?1584947815 rel=stylesheet><link href=/ghpages-test/css/hugo-theme.css?1584947815 rel=stylesheet><script src=/ghpages-test/js/jquery-3.3.1.min.js?1584947815></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/><nav id=sidebar><div id=header-wrapper><div id=header><a id=logo href=/ghpages-test/><img src=/ghpages-test//images/fmw_12c_12_2_1_4_0-logo.png height=100><br><b>Oracle Fusion Middleware on Kubernetes</b></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label><input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=/ghpages-test/js/lunr.min.js?1584947815></script><script type=text/javascript src=/ghpages-test/js/auto-complete.js?1584947815></script><script type=text/javascript>var baseurl="\/ghpages-test\/";</script><script type=text/javascript src=/ghpages-test/js/search.js?1584947815></script></div><div class=highlightable><ul class=topics><li><a class=padding href=/fmw-kubernetes/>Home</a></li><li data-nav-id=/ghpages-test/soa-domains/ title="Oracle SOA Suite" class=dd-item><a href=/ghpages-test/soa-domains/>Oracle SOA Suite</a><ul><li data-nav-id=/ghpages-test/soa-domains/prerequisites/ title=Prerequisites class=dd-item><a href=/ghpages-test/soa-domains/prerequisites/><b>1. </b>Prerequisites</a></li><li data-nav-id=/ghpages-test/soa-domains/prepare-your-environment/ title="Prepare your environment" class=dd-item><a href=/ghpages-test/soa-domains/prepare-your-environment/><b>2. </b>Prepare your environment</a></li><li data-nav-id=/ghpages-test/soa-domains/create-soa-domains/ title="Create SOA domains" class=dd-item><a href=/ghpages-test/soa-domains/create-soa-domains/><b>3. </b>Create SOA domains</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/ title="Manage SOA Domains" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/><b>4. </b>Manage SOA Domains</a><ul><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/configuring-load-balancer/ title="Configuring a load balancer for SOA Domains" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/configuring-load-balancer/><b>1. </b>Configuring a load balancer for SOA Domains</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/monitoring-soa-domains/ title="Monitoring a SOA domain" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/monitoring-soa-domains/><b>2. </b>Monitoring a SOA domain</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/delete-domain-home/ title="Delete the SOA domain home" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/delete-domain-home/><b>3. </b>Delete the SOA domain home</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/supportjdev/ title="Deploying SOA Composites from Oracle JDeveloper" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/supportjdev/><b>4. </b>Deploying SOA Composites from Oracle JDeveloper</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/enablingt3/ title="Expose T3 protocol for Managed Servers" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/enablingt3/><b>5. </b>Expose T3 protocol for Managed Servers</a></li><li data-nav-id=/ghpages-test/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/ title="Persisting SOA Adapters Customizations" class=dd-item><a href=/ghpages-test/soa-domains/manage-soa-domains/persisting-soa-adapters-customizations/><b>6. </b>Persisting SOA Adapters Customizations</a></li></ul></li><li data-nav-id=/ghpages-test/soa-domains/patch-soa-domains/ title="Patch SOA domains" class=dd-item><a href=/ghpages-test/soa-domains/patch-soa-domains/><b>5. </b>Patch SOA domains</a></li><li data-nav-id=/ghpages-test/soa-domains/known-issues/ title="Known Issues" class=dd-item><a href=/ghpages-test/soa-domains/known-issues/><b>6. </b>Known Issues</a></li><li data-nav-id=/ghpages-test/soa-domains/release-notes/ title="Release Notes" class=dd-item><a href=/ghpages-test/soa-domains/release-notes/>Release Notes</a></li></ul></li><li data-nav-id=/ghpages-test/wcsites-domains/ title="Oracle WebCenter Sites" class="dd-item 
+        parent"><a href=/ghpages-test/wcsites-domains/>Oracle WebCenter Sites</a><ul><li data-nav-id=/ghpages-test/wcsites-domains/pre-requisites/ title=Pre-requisites class=dd-item><a href=/ghpages-test/wcsites-domains/pre-requisites/><b>1. </b>Pre-requisites</a></li><li data-nav-id=/ghpages-test/wcsites-domains/prepare-your-environment/ title="Prepare your environment" class=dd-item><a href=/ghpages-test/wcsites-domains/prepare-your-environment/><b>2. </b>Prepare your environment</a></li><li data-nav-id=/ghpages-test/wcsites-domains/create-wcsites-domains/ title="Create WebCenter Sites domains" class=dd-item><a href=/ghpages-test/wcsites-domains/create-wcsites-domains/><b>3. </b>Create WebCenter Sites domains</a></li><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/ title="Manage WebCenter Sites domains" class="dd-item 
+        parent"><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/><b>4. </b>Manage WebCenter Sites domains</a><ul><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/ title="a. Using Traefik Loadbalancer" class="dd-item active"><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-traefik-setup-for-wcsites-domain-setup-on-k8s/>a. Using Traefik Loadbalancer</a></li><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/ title="b. Using Voyager Loadbalancer" class=dd-item><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/>b. Using Voyager Loadbalancer</a></li><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/ title="c. ELK Integration for Logs" class=dd-item><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/elasticsearch-integration-with-wls-operator-wls-server-logs/>c. ELK Integration for Logs</a></li><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/ title="d. Publish logs to Elasticsearch" class=dd-item><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-logging-exporter-setup/>d. Publish logs to Elasticsearch</a></li><li data-nav-id=/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/ title="e. Monitor a WebCenter Sites domain" class=dd-item><a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/weblogic-monitoring-exporter-setup/>e. Monitor a WebCenter Sites domain</a></li></ul></li><li data-nav-id=/ghpages-test/wcsites-domains/known-issues/ title="Known Issues in WCSites" class=dd-item><a href=/ghpages-test/wcsites-domains/known-issues/><b>6. </b>Known Issues in WCSites</a></li><li data-nav-id=/ghpages-test/wcsites-domains/release-notes/ title="Release Notes" class=dd-item><a href=/ghpages-test/wcsites-domains/release-notes/>Release Notes</a></li></ul></li></ul><section id=footer><p>Created with <i class="fas fa-heart"></i>from <a href=https://www.oracle.com>Oracle</a></p><p>&nbsp;</p><p><a href=https://github.com/oracle/fmw-kubernetes><i class="fab fa-github"></i>GitHub repo</a></p><p><a href=https://weblogic-slack-inviter.herokuapp.com/><i class="fab fa-slack"></i>Public Slack #</a></p></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i></a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span><span class=links><a href=/ghpages-test/>Oracle Fusion Middleware on Kubernetes</a> > <a href=/ghpages-test/wcsites-domains/>Oracle WebCenter Sites</a> > <a href=/ghpages-test/wcsites-domains/manage-wcsites-domains/>Manage WebCenter Sites domains</a> > a. Using Traefik Loadbalancer</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#setting-up-loadbalancer-traefik-for-the-webcenter-sites-domain-on-k8s>Setting Up Loadbalancer Traefik for the WebCenter Sites Domain on K8S</a><ul><li><a href=#install-the-traefik-load-balancer>Install the Traefik Load Balancer</a></li><li><a href=#configure-traefik-to-manage-ingresses>Configure Traefik to Manage Ingresses</a></li><li><a href=#create-an-ingress-for-the-domain>Create an Ingress for the Domain</a></li></ul></li></ul></li></ul></li><li><a href=#copyright-2020-oracle-corporation-and-or-its-affiliates>Copyright 2020, Oracle Corporation and/or its affiliates.</a></li><li><a href=#licensed-under-the-universal-permissive-license-v-1-0-as-shown-at-https-oss-oracle-com-licenses-upl>Licensed under the Universal Permissive License v 1.0 as shown at <a href=https://oss.oracle.com/licenses/upl>https://oss.oracle.com/licenses/upl</a>.</a><ul><li><a href=#if-eq-values-type-traefik>{{- if eq .Values.type &ldquo;TRAEFIK&rdquo; }}</a></li></ul></li><li><a href=#path-wls-cat>- path: /wls-cat</a></li><li><a href=#backend>backend:</a></li><li><a href=#servicename-values-wlsdomain-domainuid-cluster-values-wlsdomain-wcsitesclustername-lower-replace>serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;</a></li><li><a href=#serviceport-values-wlsdomain-wcsitesmanagedserverport>servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</a></li><li><a href=#path>- path:</a></li><li><a href=#backend-1>backend:</a></li><li><a href=#servicename-values-wlsdomain-domainuid-cluster-values-wlsdomain-wcsitesclustername-lower-replace-1>serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;</a></li><li><a href=#serviceport-values-wlsdomain-wcsitesmanagedserverport-1>servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</a><ul><li><ul><li><ul><li><a href=#verify-that-you-can-access-the-domain-url>Verify that You can Access the Domain URL</a></li></ul></li></ul></li></ul></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>a. Using Traefik Loadbalancer</h1><h3 id=setting-up-loadbalancer-traefik-for-the-webcenter-sites-domain-on-k8s>Setting Up Loadbalancer Traefik for the WebCenter Sites Domain on K8S</h3><p>The Oracle WebLogic Server Kubernetes Operator supports three load balancers: Traefik, Voyager, and Apache. Follow these steps to set up Traefik as a loadbalancer for the WebCenter Sites domain:</p><ol><li><a href=#install-the-traefik-load-balancer>Install the Traefik Load Balancer</a></li><li><a href=#configure-traefik-to-manage-ingresses>Configure Traefik to Manage Ingresses</a></li><li><a href=#create-an-ingress-for-the-domain>Create an Ingress for the Domain</a></li><li><a href=#verify-that-you-can-access-the-domain-url>Verify that You can Access the Domain URL</a></li></ol><h4 id=install-the-traefik-load-balancer>Install the Traefik Load Balancer</h4><ol><li><p>Use helm to install the Traefik load balancer. For detailed information, see <a href=https://github.com/oracle/weblogic-kubernetes-operator/blob/master/kubernetes/samples/charts/traefik/README.md>this document</a>.
+Use the values.yaml file in the sample but set <code>kubernetes.namespaces</code> specifically.</p><blockquote><p>Install Traefik</p></blockquote><pre><code class=language-bash>$ cd weblogic-kubernetes-operator
+$ helm install stable/traefik --name traefik-operator \
+    --namespace traefik --values kubernetes/samples/charts/traefik/values.yaml \
+    --set &quot;dashboard.domain=$(hostname -f),kubernetes.namespaces={traefik}&quot;
+</code></pre><blockquote><p>Output</p></blockquote><p>```bash
+$ cd weblogic-kubernetes-operator</p><p>$ helm install stable/traefik &ndash;name traefik-operator &ndash;namespace traefik &ndash;values kubernetes/2.4.0/charts/traefik/values.yaml &ndash;set &ldquo;kubernetes.namespaces={traefik}&rdquo; &ndash;wait
+NAME: traefik-operator
+LAST DEPLOYED: Sat Mar 14 13:53:16 2020
+NAMESPACE: traefik
+STATUS: DEPLOYED</p><p>RESOURCES:
+==&gt; v1/Service
+NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+traefik-operator-dashboard ClusterIP 10.108.89.215 <none>80/TCP 0s
+traefik-operator NodePort 10.99.75.162 <none>443:30443/TCP,80:30305/TCP 0s</p><p>==&gt; v1/Secret
+NAME TYPE DATA AGE
+traefik-operator-default-cert Opaque 2 0s</p><p>==&gt; v1/ServiceAccount
+NAME SECRETS AGE
+traefik-operator 1 0s</p><p>==&gt; v1/RoleBinding
+NAME AGE
+traefik-operator 0s</p><p>==&gt; v1beta1/Ingress
+NAME HOSTS ADDRESS PORTS AGE
+traefik-operator-dashboard blr00aqi.in.oracle.com 80 0s</p><p>==&gt; v1/Pod(related)
+NAME READY STATUS RESTARTS AGE
+traefik-operator-844859fdd6-prh55 0/1 ContainerCreating 0 0s</p><p>==&gt; v1/ConfigMap
+NAME DATA AGE
+traefik-operator 1 0s</p><p>==&gt; v1/Role
+NAME AGE
+traefik-operator 0s</p><p>==&gt; v1/Deployment
+NAME DESIRED CURRENT UP-TO-DATE AVAILABLE AGE
+traefik-operator 1 1 1 0 0s</p><p>NOTES:</p><ol><li><p>Traefik is listening on the following ports on the host machine:</p><p>http - 30305
+https - 30443</p></li><li><p>Configure DNS records corresponding to Kubernetes ingress resources to point to the NODE_IP/NODE_HOST
+```</p></li></ol></li><li><p>Access the Traefik dashboard through the URL <code>http://$(hostname -f):30305</code>, with the HTTP host <code>traefik.example.com</code>.
+NOTE: Make sure you specify full qualified node name for <code>$(hostname -f)</code>.</p><pre><code class=language-bash>$curl -H 'host: $(hostname -f)' http://$(hostname -f):30305/
+&lt;a href=&quot;/dashboard/&quot;&gt;Found&lt;/a&gt;.
+$
+</code></pre></li></ol><h4 id=configure-traefik-to-manage-ingresses>Configure Traefik to Manage Ingresses</h4><p>Configure Traefik to manage Ingresses created in this namespace:
+Note: Here traefik is the Traefik namespace, <code>wcsites-ns</code> is the namespace of the domain.</p><blockquote><p>helm upgrade for traefik</p></blockquote><pre><code class=language-bash>$ helm upgrade --reuse-values --set &quot;kubernetes.namespaces={traefik,wcsites-ns}&quot; --wait traefik-operator stable/traefik
+Release &quot;traefik-operator&quot; has been upgraded. Happy Helming!
+LAST DEPLOYED: Sat Mar 14 13:58:03 2020
+NAMESPACE: traefik
+STATUS: DEPLOYED
+
+RESOURCES:
+==&gt; v1/ConfigMap
+NAME              DATA  AGE
+traefik-operator  1     5m2s
+
+==&gt; v1/ClusterRole
+NAME              AGE
+traefik-operator  14s
+
+==&gt; v1/Service
+NAME                        TYPE       CLUSTER-IP     EXTERNAL-IP  PORT(S)                     AGE
+traefik-operator-dashboard  ClusterIP  10.108.89.215  &lt;none&gt;       80/TCP                      5m2s
+traefik-operator            NodePort   10.99.75.162   &lt;none&gt;       443:30443/TCP,80:30305/TCP  5m2s
+
+==&gt; v1/Deployment
+NAME              DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+traefik-operator  1        1        1           1          5m2s
+
+==&gt; v1/Secret
+NAME                           TYPE    DATA  AGE
+traefik-operator-default-cert  Opaque  2     5m2s
+
+==&gt; v1/ServiceAccount
+NAME              SECRETS  AGE
+traefik-operator  1        5m2s
+
+==&gt; v1/ClusterRoleBinding
+NAME              AGE
+traefik-operator  14s
+
+==&gt; v1beta1/Ingress
+NAME                        HOSTS                   ADDRESS  PORTS  AGE
+traefik-operator-dashboard  blr00aqi.in.oracle.com  80       5m2s
+
+==&gt; v1/Pod(related)
+NAME                               READY  STATUS       RESTARTS  AGE
+traefik-operator-844699994b-ttfb6  1/1    Running      0         14s
+traefik-operator-844859fdd6-prh55  0/1    Terminating  0         5m2s
+
+
+NOTES:
+
+1. Traefik is listening on the following ports on the host machine:
+
+     http - 30305
+     https - 30443
+
+2. Configure DNS records corresponding to Kubernetes ingress resources to point to the NODE_IP/NODE_HOST
+</code></pre><h4 id=create-an-ingress-for-the-domain>Create an Ingress for the Domain</h4><ol><li><p>Create an Ingress for the domain (<code>ingress-per-domain-wcsites</code>), in the domain namespace by using the sample Helm chart.
+Here we are using the path-based routing for ingress. For detailed instructions about ingress, see <a href=https://oracle.github.io/weblogic-kubernetes-operator/userguide/managing-domains/ingress/>this page</a>).</p><p>For now, you can update the <code>kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain/values.yaml</code> with appropriate values. Sample values are shown below:</p><pre><code class=language-bash>$ cat kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain/values.yaml
+    
+# Copyright 2020, Oracle Corporation and/or its affiliates.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+    
+# Default values for ingress-per-domain.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+    
+# Load balancer type.  Supported values are: TRAEFIK, VOYAGER
+type: TRAEFIK
+#type: VOYAGER
+    
+# WLS domain as backend to the load balancer
+wlsDomain:
+domainUID: wcsitesinfra
+adminServerName: adminserver
+adminServerPort: 7001
+wcsitesClusterName: wcsites_cluster
+wcsitesManagedServerPort: 8001
+    
+# Voyager specific values
+voyager:
+# web port
+webPort: 30305
+# stats port
+statsPort: 30317   
+</code></pre></li><li><p>Update the <code>kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain/templates/traefik-ingress.yaml</code> with the url routes to be load balanced.</p><p>Below are the defined ingress rules:</p><p>NOTE: This is not an exhaustive list of rules. You can enhance it based on the application urls that need to be accessed externally. These rules hold good for domain type <code>WCSITES</code>.
+```bash
+$ vi kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain/templates/traefik-ingress.yaml</p><h1 id=copyright-2020-oracle-corporation-and-or-its-affiliates>Copyright 2020, Oracle Corporation and/or its affiliates.</h1><h1 id=licensed-under-the-universal-permissive-license-v-1-0-as-shown-at-https-oss-oracle-com-licenses-upl>Licensed under the Universal Permissive License v 1.0 as shown at <a href=https://oss.oracle.com/licenses/upl>https://oss.oracle.com/licenses/upl</a>.</h1><h2 id=if-eq-values-type-traefik>{{- if eq .Values.type &ldquo;TRAEFIK&rdquo; }}</h2><p>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: {{ .Values.wlsDomain.domainUID }}-traefik
+namespace: {{ .Release.Namespace }}
+labels:
+weblogic.resourceVersion: domain-v2
+spec:
+annotations:
+kubernetes.io/ingress.class: traefik
+rules:</p><ul><li><p>host: &lsquo;{{ .Values.traefik.hostname }}&rsquo;
+http:
+paths:</p><ul><li>path: /console
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-{{ .Values.wlsDomain.adminServerName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.adminServerPort }}</li><li>path: /em
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-{{ .Values.wlsDomain.adminServerName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.adminServerPort }}</li><li>path: /wls-exporter
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-{{ .Values.wlsDomain.adminServerName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.adminServerPort }}</li><li>path: /weblogic
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-{{ .Values.wlsDomain.adminServerName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.adminServerPort }}</li><li>path: /sbconsole
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-{{ .Values.wlsDomain.adminServerName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.adminServerPort }}</li><li>path: /sites
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</li><li>path: /cas
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</li><li><p>path: /wls-exporter
+backend:
+serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;
+servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</p><h1 id=path-wls-cat>- path: /wls-cat</h1><h1 id=backend>backend:</h1><h1 id=servicename-values-wlsdomain-domainuid-cluster-values-wlsdomain-wcsitesclustername-lower-replace>serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;</h1><h1 id=serviceport-values-wlsdomain-wcsitesmanagedserverport>servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</h1><h1 id=path>- path:</h1><h1 id=backend-1>backend:</h1><h1 id=servicename-values-wlsdomain-domainuid-cluster-values-wlsdomain-wcsitesclustername-lower-replace-1>serviceName: &lsquo;{{ .Values.wlsDomain.domainUID }}-cluster-{{ .Values.wlsDomain.wcsitesClusterName | lower | replace &ldquo;_&rdquo; &ldquo;-&rdquo; }}&rsquo;</h1><h1 id=serviceport-values-wlsdomain-wcsitesmanagedserverport-1>servicePort: {{ .Values.wlsDomain.wcsitesManagedServerPort }}</h1><p>{{- end }}</p></li></ul></li></ul><p>```</p></li><li><p>Install &ldquo;ingress-per-domain&rdquo; using helm.</p><pre><code class=language-bash>bash-4.2$ cd weblogic-kubernetes-operator
+     
+bash-4.2$ helm install kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain \
+    --name wcsitesinfra-ingress --namespace wcsites-ns \
+    --values kubernetes/samples/scripts/create-wcsites-domain/ingress-per-domain/values.yaml \
+    --set &quot;traefik.hostname=$(hostname -f)&quot;
+      
+NAME:   wcsitesinfra-ingress
+LAST DEPLOYED: Sat Mar 14 14:03:22 2020
+NAMESPACE: wcsites-ns
+STATUS: DEPLOYED
+
+RESOURCES:
+==&gt; v1beta1/Ingress
+NAME                  HOSTS        ADDRESS  PORTS  AGE
+wcsitesinfra-traefik  abc.def.com  80       0s
+</code></pre></li><li><p>To confirm that the load balancer noticed the new Ingress and is successfully routing to the domain&rsquo;s server pods, you can send a request to the URL for the &ldquo;WebLogic ReadyApp framework&rdquo; which should return a HTTP 200 status code, as shown in the example below:
+```bash
+-bash-4.2$ curl -v -H &lsquo;host: ${LOADBALANCER-HOSTNAME}&rsquo; http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/weblogic/ready</p></li><li><p>Trying 149.87.129.203&hellip;
+&gt; GET http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/weblogic/ready HTTP/1.1
+&gt; User-Agent: curl/7.29.0
+&gt; Accept: <em>/</em>
+&gt; Proxy-Connection: Keep-Alive
+&gt; host: $(hostname -f)
+&gt;
+&lt; HTTP/1.1 200 OK
+&lt; Date: Sat, 14 Mar 2020 08:35:03 GMT
+&lt; Vary: Accept-Encoding
+&lt; Content-Length: 0
+&lt; Proxy-Connection: Keep-Alive
+&lt;</p></li><li><p>Connection #0 to host localhost left intact
+```</p><h4 id=verify-that-you-can-access-the-domain-url>Verify that You can Access the Domain URL</h4></li></ol><p>After setting up the Traefik loadbalancer, verify that the domain applications are accessible through the loadbalancer port 30305.
+Through load balancer <code>(Traefik port 30305)</code>, the following URLs are available for setting up domains of WebCenter Sites domain types:</p><pre><code class=language-bash>http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/weblogic/ready
+http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/console
+http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/em
+http://${LOADBALANCER-HOSTNAME}:${LOADBALANCER-PORT}/sites/version.jsp
+</code></pre><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=/ghpages-test/wcsites-domains/manage-wcsites-domains/ title="Manage WebCenter Sites domains"><i class="fa fa-chevron-left"></i></a><a class="nav nav-next" href=/ghpages-test/wcsites-domains/manage-wcsites-domains/loadbalancer-voyager-setup-for-wcsites-domain-setup-on-k8s/ title="b. Using Voyager Loadbalancer" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=/ghpages-test/js/clipboard.min.js?1584947815></script><script src=/ghpages-test/js/perfect-scrollbar.min.js?1584947815></script><script src=/ghpages-test/js/perfect-scrollbar.jquery.min.js?1584947815></script><script src=/ghpages-test/js/jquery.sticky.js?1584947815></script><script src=/ghpages-test/js/featherlight.min.js?1584947815></script><script src=/ghpages-test/js/highlight.pack.js?1584947815></script><script>hljs.initHighlightingOnLoad();</script><script src=/ghpages-test/js/modernizr.custom-3.6.0.js?1584947815></script><script src=/ghpages-test/js/learn.js?1584947815></script><script src=/ghpages-test/js/hugo-learn.js?1584947815></script><link href=/ghpages-test/mermaid/mermaid.css?1584947815 rel=stylesheet><script src=/ghpages-test/mermaid/mermaid.js?1584947815></script><script>mermaid.initialize({startOnLoad:true});</script></body></html>
